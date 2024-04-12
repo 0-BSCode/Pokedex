@@ -33,3 +33,11 @@ function App() {
 }
 
 export default App
+
+/**
+ * TODO
+ * 1. Fetch the pokemon information (use https://pokeapi.co/api/v2/pokemon/{id or name}/)
+ * 2. Fetch pokemon type information (use https://pokeapi.co/api/v2/type/{name}/, use half_damage_to and no_damage_to fields)
+ * 3. Card info: ID, Name, Photo, Type
+ * 4. Detailed info: ID, Name, Photo, Types, Height, Weight, Categories, Stats, Weakness
+ */
