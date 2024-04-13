@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react'
 import './App.css'
 import PokemonService from './services/pokemonService'
 import usePokemonStore from './stores/pokemonStore'
-import stringTypeToEnumMapping from './_utils/inferTypeFromString'
 import determineTypesWeaknesses from './_utils/determineTypesWeakness'
 import inferTypeFromString from './_utils/inferTypeFromString'
 
