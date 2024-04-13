@@ -2,11 +2,9 @@ import { useEffect, useRef } from 'react'
 import './App.css'
 import PokemonService from './services/pokemonService'
 import usePokemonStore from './stores/pokemonStore'
-import determineTypesWeaknesses from './_utils/determineTypesWeakness'
-import inferTypeFromString from './_utils/inferTypeFromString'
 
 function App() {
-  const {extend, pokemon} = usePokemonStore()
+  const {extendPokemon, pokemon} = usePokemonStore()
   const isCalled = useRef(false)
 
   useEffect(() => {
@@ -21,7 +19,7 @@ function App() {
     }
 
     if (!isCalled.current) {
-      getPokemon().then((data) => extend(data))
+      getPokemon().then((data) => extendPokemon(data))
       isCalled.current = true
     }
   }, [])
