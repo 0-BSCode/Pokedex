@@ -8,6 +8,7 @@ const LIMIT = 10
 const OFFSET = 10
 
 const PokemonService = {
+  // TODO: Refactor names
   fetchPokemonPagination: async (pageNumber: number) => {
     const response = await fetch(
       `${BASE_URL}/pokemon/?limit=${LIMIT}&offset=${OFFSET * pageNumber}`,
