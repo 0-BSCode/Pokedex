@@ -4,7 +4,7 @@ export interface PokemonI {
     photoURL: string
     height: number
     weight: number
-    types: string[]
+    types: PokemonTypeInformationI[]
     stats: PokemonStatI[]
 }
 
@@ -12,4 +12,14 @@ export interface PokemonStatI {
     name: string
     baseState: number
     effort: 0
+}
+
+export interface PokemonTypeInformationI {
+    slot: number
+    type: PokemonTypeI
+}
+
+export interface PokemonTypeI {
+    name: string
+    url: string
 }
