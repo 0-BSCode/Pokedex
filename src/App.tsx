@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react'
 import './App.css'
 import PokemonService from './services/pokemonService'
 import usePokemonStore from './stores/pokemonStore'
+import determineTypeWeakness from './_utils/determineTypeWeakness'
+import stringTypeToEnumMapping from './_utils/stringTypeToEnumMapping'
 
 function App() {
   const {extend, pokemon} = usePokemonStore()
@@ -25,6 +27,8 @@ function App() {
     }
   }, [])
 
+  console.log(pokemon)
+
   return (
     <>
       {pokemon.map(p => (
@@ -32,7 +36,24 @@ function App() {
           <p>{p.id}</p>
           <p>{p.name}</p>
           <img src={`${p.photoURL}`} alt={`${p.name} Picture`} />
-          <p>{p.types.toString()}</p>
+          {p.types.map(t => (
+            <div>
+              {t.type.name}
+              {/* TODO: Extract type information from API (map to enum) */}
+              {determineTypeWeakness(stringTypeToEnumMapping[`${t.type.name}`]).map(w => (
+                <p>{w}</p>
+              ))}
+            </div>
+          ))}
+          <p>{p.height}</p>
+          <p>{p.weight}</p>
+          <div>
+            {p.stats.map(s => (
+              <div>
+                {s.stat.name}: {s.base_stat}
+              </div>
+            ))}
+          </div>
         </div>
       ))}
     </>

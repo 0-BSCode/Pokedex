@@ -5,13 +5,19 @@ export interface PokemonI {
     height: number
     weight: number
     types: PokemonTypeInformationI[]
-    stats: PokemonStatI[]
+    stats: PokemonStatInformationI[]
+}
+
+export interface PokemonStatInformationI {
+    // TODO: Standardize to camel case
+    base_stat: number
+    effort: 0
+    stat: PokemonStatI
 }
 
 export interface PokemonStatI {
     name: string
-    baseState: number
-    effort: 0
+    url: string
 }
 
 export interface PokemonTypeInformationI {

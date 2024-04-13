@@ -1,5 +1,6 @@
 import { PokemonTypesEnum } from "@/types/enums/PokemonTypesEnum";
 
+// TODO: Make a mapping instead
 // Source: https://www.eurogamer.net/pokemon-go-type-chart-effectiveness-weaknesses
 const determineTypeWeakness = (type: PokemonTypesEnum): PokemonTypesEnum[] => {
     let result: PokemonTypesEnum[] = []
