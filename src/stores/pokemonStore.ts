@@ -1,16 +1,16 @@
-import { PokemonI } from "@/types/pokemon";
+import { PokemonType } from "@/types/PokemonType";
 import { create } from "zustand";
 
 type PokemonStore = {
-    pokemon: PokemonI[]
-    push: (value: PokemonI) => void
-    extend: (value: PokemonI[]) => void
+    pokemon: PokemonType[]
+    push: (value: PokemonType) => void
+    extend: (value: PokemonType[]) => void
 }
 
 const usePokemonStore = create<PokemonStore>()((set) => ({
     pokemon: [],
-    push: (value: PokemonI) => set((state) => ({pokemon: [...state.pokemon, value]})),
-    extend: (values: PokemonI[]) => set((state) => ({pokemon: [...state.pokemon, ...values]}))
+    push: (value: PokemonType) => set((state) => ({pokemon: [...state.pokemon, value]})),
+    extend: (values: PokemonType[]) => set((state) => ({pokemon: [...state.pokemon, ...values]}))
 }))
 
 export default usePokemonStore

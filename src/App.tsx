@@ -10,12 +10,11 @@ function App() {
   const isCalled = useRef(false)
 
   useEffect(() => {
+    // FORMAT DATA ON FETCH
     const getPokemon = async () => {
       const data = await PokemonService.fetchPokemonPagination(0)
       const pokeData = await Promise.all(data.results.map(async (res) => {
         const pokemonInfo = await PokemonService.fetchPokemon(res.url)
-        const photoId = pokemonInfo.id.toString().padStart(3, "0")
-        pokemonInfo.photoURL = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${photoId}.png`
         return pokemonInfo
       }))
       return pokeData
@@ -27,13 +26,15 @@ function App() {
     }
   }, [])
 
+  console.log(pokemon)
+
   return (
     <>
       {pokemon.map(p => (
         <div>
-          <p>{p.id}</p>
+          {/* <p>{p.id}</p>
           <p>{p.name}</p>
-          <img src={`${p.photoURL}`} alt={`${p.name} Picture`} />
+          <img src={`${p.photoUrl}`} alt={`${p.name} Picture`} />
           {determineTypesWeaknesses(p.types.map(t => inferTypeFromString(t.type.name))).map(w => (
             <div>
               {w}
@@ -47,7 +48,7 @@ function App() {
                 {s.stat.name}: {s.base_stat}
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       ))}
     </>
