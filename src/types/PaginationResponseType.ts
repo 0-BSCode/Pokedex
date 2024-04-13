@@ -1,11 +1,11 @@
 export interface PaginationResponseType {
-    count: number
-    next: string
-    previous: string
-    results: PaginationResponseResultType[]
+  count: number
+  next: string
+  previous: string
+  results: PaginationResponseResultType[]
 }
 
 export interface PaginationResponseResultType {
-    name: string
-    url: string
+  name: string
+  url: string
 }

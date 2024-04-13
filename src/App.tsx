@@ -4,21 +4,23 @@ import PokemonService from './services/pokemonService'
 import usePokemonStore from './stores/pokemonStore'
 
 function App() {
-  const {extendPokemon, pokemon} = usePokemonStore()
+  const { extendPokemon, pokemon } = usePokemonStore()
   const isCalled = useRef(false)
 
   useEffect(() => {
     const getPokemon = async () => {
       const data = await PokemonService.fetchPokemonPagination(0)
-      const pokeData = await Promise.all(data.results.map(async (res) => {
-        const pokemonInfo = await PokemonService.fetchPokemon(res.url)
-        return pokemonInfo
-      }))
+      const pokeData = await Promise.all(
+        data.results.map(async res => {
+          const pokemonInfo = await PokemonService.fetchPokemon(res.url)
+          return pokemonInfo
+        }),
+      )
       return pokeData
     }
 
     if (!isCalled.current) {
-      getPokemon().then((data) => extendPokemon(data))
+      getPokemon().then(data => extendPokemon(data))
       isCalled.current = true
     }
   }, [])
