@@ -1,4 +1,4 @@
-import { PokemonTypesEnum } from './enums/PokemonTypesEnum'
+import { PokemonTypesEnum } from "./enums/PokemonTypesEnum"
 
 export interface PokemonType {
   id: number

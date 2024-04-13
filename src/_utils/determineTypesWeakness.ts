@@ -1,4 +1,4 @@
-import { PokemonTypesEnum } from '@/types/enums/PokemonTypesEnum'
+import { PokemonTypesEnum } from "@/types/enums/PokemonTypesEnum"
 
 // Source: https://www.eurogamer.net/pokemon-go-type-chart-effectiveness-weaknesses
 const typeToWeaknessMapping: Record<PokemonTypesEnum, PokemonTypesEnum[]> = {

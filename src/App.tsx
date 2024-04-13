@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react"
-import "./App.css"
 import PokemonService from "./services/pokemonService"
 import usePokemonStore from "./stores/pokemonStore"
 
@@ -29,6 +28,7 @@ function App() {
     <>
       {pokemon.map(p => (
         <div>
+          <h1 className="text-3xl font-bold underline">Hello world!</h1>
           {/* <p>{p.id}</p>
           <p>{p.name}</p>
           <img src={`${p.photoUrl}`} alt={`${p.name} Picture`} />

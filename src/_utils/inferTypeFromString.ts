@@ -1,4 +1,4 @@
-import { PokemonTypesEnum } from '@/types/enums/PokemonTypesEnum'
+import { PokemonTypesEnum } from "@/types/enums/PokemonTypesEnum"
 
 const stringTypeToEnumMapping: Record<string, PokemonTypesEnum> = {
   bug: PokemonTypesEnum.BUG,

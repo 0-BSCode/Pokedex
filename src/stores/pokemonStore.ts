@@ -1,5 +1,5 @@
-import { PokemonType } from '@/types/PokemonType'
-import { create } from 'zustand'
+import { PokemonType } from "@/types/PokemonType"
+import { create } from "zustand"
 
 type PokemonStore = {
   pokemon: PokemonType[]

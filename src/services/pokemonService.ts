@@ -1,9 +1,9 @@
-import inferTypeFromString from '@/_utils/inferTypeFromString'
-import { PaginationResponseType } from '@/types/PaginationResponseType'
-import { PokemonResponseType } from '@/types/PokemonResponseType'
-import { PokemonType } from '@/types/PokemonType'
+import inferTypeFromString from "@/_utils/inferTypeFromString"
+import { PaginationResponseType } from "@/types/PaginationResponseType"
+import { PokemonResponseType } from "@/types/PokemonResponseType"
+import { PokemonType } from "@/types/PokemonType"
 
-const BASE_URL = 'https://pokeapi.co/api/v2'
+const BASE_URL = "https://pokeapi.co/api/v2"
 const LIMIT = 10
 
 const PokemonService = {
@@ -20,7 +20,7 @@ const PokemonService = {
     const data = (await response.json()) as PokemonResponseType
 
     // Parse data
-    const photoId = data.id.toString().padStart(3, '0')
+    const photoId = data.id.toString().padStart(3, "0")
     const photoUrl = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${photoId}.png`
     const pokemonInfo: PokemonType = {
       id: data.id,
