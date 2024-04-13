@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react'
-import './App.css'
-import PokemonService from './services/pokemonService'
-import usePokemonStore from './stores/pokemonStore'
+import { useEffect, useRef } from "react"
+import "./App.css"
+import PokemonService from "./services/pokemonService"
+import usePokemonStore from "./stores/pokemonStore"
 
 function App() {
   const { extendPokemon, pokemon } = usePokemonStore()
@@ -25,7 +25,6 @@ function App() {
     }
   }, [])
 
-  console.log('hi')
   return (
     <>
       {pokemon.map(p => (

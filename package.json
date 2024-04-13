@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint . --ext ts,tsx --fix --report-unused-disable-directives --max-warnings 0",
     "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(tsx|ts|html|css|cjs)\"",
     "format": "npm run lint && npm run prettier",
     "preview": "vite preview",
@@ -38,7 +38,7 @@
   "lint-staged": {
     "*.{ts,tsx}": [
       "prettier --write",
-      "eslint"
+      "eslint --fix"
     ],
     "*.{ts,tsx,html,css,cjs}": [
       "prettier --write"
