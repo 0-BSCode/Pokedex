@@ -21,4 +21,8 @@ const stringTypeToEnumMapping: Record<string, PokemonTypesEnum> = {
     "water": PokemonTypesEnum.WATER
 }
 
-export default stringTypeToEnumMapping
+const inferTypeFromString = (typeString: string): PokemonTypesEnum => {
+    return stringTypeToEnumMapping[typeString]
+}
+
+export default inferTypeFromString
