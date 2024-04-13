@@ -25,8 +25,7 @@ function App() {
     }
   }, [])
 
-  console.log('test')
-
+  console.log('hi')
   return (
     <>
       {pokemon.map(p => (
