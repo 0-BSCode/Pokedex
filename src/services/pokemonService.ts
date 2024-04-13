@@ -5,11 +5,12 @@ import { PokemonType } from "@/types/PokemonType"
 
 const BASE_URL = "https://pokeapi.co/api/v2"
 const LIMIT = 10
+const OFFSET = 10
 
 const PokemonService = {
-  fetchPokemonPagination: async (offset: number) => {
+  fetchPokemonPagination: async (pageNumber: number) => {
     const response = await fetch(
-      `${BASE_URL}/pokemon/?limit=${LIMIT}&offset=${offset}`,
+      `${BASE_URL}/pokemon/?limit=${LIMIT}&offset=${OFFSET * pageNumber}`,
     )
     const data = (await response.json()) as PaginationResponseType
     return data

@@ -1,9 +1,11 @@
 import { useEffect, useRef } from "react"
 import PokemonService from "./services/pokemonService"
 import usePokemonStore from "./stores/pokemonStore"
+import usePageStore from "./stores/pageStore"
 
 function App() {
-  const { extendPokemon, pokemon } = usePokemonStore()
+  const { pokemon, extendPokemon } = usePokemonStore()
+  const { pageNumber, increasePageNumber } = usePageStore()
   const isCalled = useRef(false)
 
   useEffect(() => {
