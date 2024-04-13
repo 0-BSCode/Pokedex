@@ -8,7 +8,6 @@ function App() {
   const isCalled = useRef(false)
 
   useEffect(() => {
-    // FORMAT DATA ON FETCH
     const getPokemon = async () => {
       const data = await PokemonService.fetchPokemonPagination(0)
       const pokeData = await Promise.all(data.results.map(async (res) => {
