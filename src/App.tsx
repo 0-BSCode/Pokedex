@@ -8,6 +8,7 @@ function App() {
   const { pokemon, extendPokemon } = usePokemonStore()
   const { pageNumber, increasePageNumber } = usePageStore()
   const isCalled = useRef(false)
+  // TODO: Extract to external function (just call function here)
   const getPokemon = async () => {
     const data = await PokemonService.fetchPokemonPagination(pageNumber)
     const pokeData = await Promise.all(
