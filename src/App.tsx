@@ -1,10 +1,11 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import './App.css'
 import PokemonService from './services/pokemonService'
 import usePokemonStore from './stores/pokemonStore'
 
 function App() {
   const {extend, pokemon} = usePokemonStore()
+  const isCalled = useRef(false)
 
   useEffect(() => {
     const getPokemon = async () => {
@@ -18,10 +19,11 @@ function App() {
       return pokeData
     }
 
-    getPokemon().then((data) => extend(data))
+    if (!isCalled.current) {
+      getPokemon().then((data) => extend(data))
+      isCalled.current = true
+    }
   }, [])
-
-  console.log(pokemon)
 
   return (
     <>
