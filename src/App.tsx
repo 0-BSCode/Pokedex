@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react"
 import PokemonService from "./services/pokemonService"
 import usePokemonStore from "./stores/pokemonStore"
 import usePageStore from "./stores/pageStore"
+import OverviewCard from "./components/overviewCard"
 
 function App() {
   const { pokemon, extendPokemon } = usePokemonStore()
@@ -29,26 +30,7 @@ function App() {
   return (
     <>
       {pokemon.map(p => (
-        <div>
-          <h1 className="text-3xl font-bold underline">Hello world!</h1>
-          {/* <p>{p.id}</p>
-          <p>{p.name}</p>
-          <img src={`${p.photoUrl}`} alt={`${p.name} Picture`} />
-          {determineTypesWeaknesses(p.types.map(t => inferTypeFromString(t.type.name))).map(w => (
-            <div>
-              {w}
-            </div>
-          ))}
-          <p>{p.height}</p>
-          <p>{p.weight}</p>
-          <div>
-            {p.stats.map(s => (
-              <div>
-                {s.stat.name}: {s.base_stat}
-              </div>
-            ))}
-          </div> */}
-        </div>
+        <OverviewCard data={p} key={`pokemon-${p.id}`} />
       ))}
     </>
   )
