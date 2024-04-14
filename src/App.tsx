@@ -14,8 +14,7 @@ function App() {
     searchPokemon,
     sortPokemon,
   } = usePokemonStore()
-  const { pageNumber, increasePageNumber, canIncrement, setCanIncrement } =
-    usePageStore()
+  const { pageNumber, increasePageNumber } = usePageStore()
   const isCalled = useRef(false)
   const [nameSearchString, setNameSearchString] = useState("")
   const [idSearchString, setIdSearchString] = useState("")
@@ -28,6 +27,7 @@ function App() {
   const [sortFilterCriteria, setSortFilterCriteria] = useState<
     FilterCriteriaEnum | undefined
   >(undefined)
+  const [canFetch, setCanFetch] = useState(true)
 
   // TODO: Extract to external function (just call function here)
   // TODO: Add loading states
@@ -35,7 +35,7 @@ function App() {
     const data = await PokemonService.fetchPokemonPagination(pageNumber)
 
     if (data.next === null) {
-      setCanIncrement(false)
+      setCanFetch(false)
     }
 
     const pokeData = await Promise.all(
@@ -212,11 +212,11 @@ function App() {
       </div>
       <button
         onClick={() => {
-          if (canIncrement) {
+          if (canFetch) {
             increasePageNumber()
           }
         }}
-        disabled={!canIncrement}
+        disabled={!canFetch}
       >
         Load More
       </button>
