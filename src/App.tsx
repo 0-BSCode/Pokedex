@@ -87,7 +87,7 @@ function App() {
   ])
 
   return (
-    <>
+    <div className="my-4">
       <div className="flex flex-col gap-1">
         <div className="flex gap-10 justify-center">
           <div className="flex flex-col gap-2">
@@ -116,17 +116,6 @@ function App() {
             </div>
             <div className="flex gap-4">
               <TextInput
-                name="nameSearch"
-                label="Name"
-                value={nameSearchString}
-                onChange={e => setNameSearchString(e.target.value)}
-                disabled={
-                  !searchFilterCriteria ||
-                  searchFilterCriteria === FilterCriteriaEnum.ID
-                }
-                placeholder="Enter Pokemon name..."
-              />
-              <TextInput
                 name="idSearch"
                 label="ID"
                 value={idSearchString}
@@ -136,6 +125,17 @@ function App() {
                   searchFilterCriteria === FilterCriteriaEnum.NAME
                 }
                 placeholder="Enter Pokemon ID..."
+              />
+              <TextInput
+                name="nameSearch"
+                label="Name"
+                value={nameSearchString}
+                onChange={e => setNameSearchString(e.target.value)}
+                disabled={
+                  !searchFilterCriteria ||
+                  searchFilterCriteria === FilterCriteriaEnum.ID
+                }
+                placeholder="Enter Pokemon name..."
               />
             </div>
           </div>
@@ -216,22 +216,26 @@ function App() {
           </div>
         </div>
       </div>
-      <div className="w-full flex justify-center flex-wrap gap-4">
-        {filteredPokemon.map(p => (
-          <OverviewCard data={p} key={`pokemon-${p.id}`} />
-        ))}
+      <div className="flex flex-col gap-8 items-center">
+        <div className="w-full flex justify-center flex-wrap gap-4">
+          {filteredPokemon.map(p => (
+            <OverviewCard data={p} key={`pokemon-${p.id}`} />
+          ))}
+        </div>
+        <button
+          type="button"
+          className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+          onClick={() => {
+            if (canFetch) {
+              increasePageNumber()
+            }
+          }}
+          disabled={!canFetch}
+        >
+          Load More
+        </button>
       </div>
-      <button
-        onClick={() => {
-          if (canFetch) {
-            increasePageNumber()
-          }
-        }}
-        disabled={!canFetch}
-      >
-        Load More
-      </button>
-    </>
+    </div>
   )
 }
 
