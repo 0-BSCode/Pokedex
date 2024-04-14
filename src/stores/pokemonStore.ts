@@ -1,4 +1,5 @@
 import { PokemonType } from "@/types/PokemonType"
+import { FilterCriteriaEnum } from "@/types/enums/FilterCriteriaEnum"
 import { SortOrderEnum } from "@/types/enums/SortOrderEnum"
 import { create } from "zustand"
 
@@ -6,34 +7,36 @@ type PokemonStore = {
   pokemon: PokemonType[]
   filteredPokemon: PokemonType[]
   extendPokemon: (value: PokemonType[]) => void
-  searchPokemon: (name: string, id: string) => void
-  sortPokemon: (
-    nameOrder: SortOrderEnum | undefined,
-    idOrder: SortOrderEnum | undefined,
-  ) => void
+  searchPokemon: (criteria: FilterCriteriaEnum, searchString: string) => void
+  sortPokemon: (criteria: FilterCriteriaEnum, sortOrder: SortOrderEnum) => void
 }
 
 const usePokemonStore = create<PokemonStore>()(set => ({
   pokemon: [],
   filteredPokemon: [],
+  // TODO: Refactor (update only pokemon -> apply filter criteria to filteredPokemon -> show filteredPokemon)
   extendPokemon: (values: PokemonType[]) =>
     set(state => ({
       pokemon: [...state.pokemon, ...values],
       filteredPokemon: [...state.pokemon, ...values],
     })),
-  searchPokemon: (name: string, id: string) =>
+  searchPokemon: (criteria: FilterCriteriaEnum, searchString: string) =>
     set(state => {
-      const filteredPokemon = state.pokemon
+      let filteredPokemon = state.pokemon
 
-      if (name.length) {
-        filteredPokemon.filter(pokemon =>
-          pokemon.name.toLowerCase().startsWith(name.toLowerCase()),
-        )
-      }
+      if (searchString.length) {
+        if (criteria === FilterCriteriaEnum.NAME) {
+          filteredPokemon = state.pokemon.filter(pokemon =>
+            pokemon.name.toLowerCase().startsWith(searchString.toLowerCase()),
+          )
+        }
 
-      // TODO: Input validation
-      if (id.length) {
-        filteredPokemon.filter(pokemon => pokemon.id === Number(id))
+        // TODO: Input validation
+        if (criteria === FilterCriteriaEnum.ID) {
+          filteredPokemon = state.pokemon.filter(
+            pokemon => pokemon.id === Number(searchString),
+          )
+        }
       }
 
       return {
@@ -41,19 +44,16 @@ const usePokemonStore = create<PokemonStore>()(set => ({
       }
     }),
   // Sorts only the filtered Pokemon (since other Pokemon won't be displayed)
-  sortPokemon: (
-    nameOrder: SortOrderEnum | undefined,
-    idOrder: SortOrderEnum | undefined,
-  ) =>
+  sortPokemon: (criteria: FilterCriteriaEnum, sortOrder: SortOrderEnum) =>
     set(state => {
       const sortedPokemon = state.filteredPokemon.sort((a, b) => {
-        if (nameOrder !== undefined) {
-          if (a.name < b.name) return nameOrder === SortOrderEnum.ASC ? -1 : 1
-          if (a.name > b.name) return nameOrder === SortOrderEnum.ASC ? 1 : -1
+        if (criteria === FilterCriteriaEnum.NAME) {
+          if (a.name < b.name) return sortOrder === SortOrderEnum.ASC ? -1 : 1
+          if (a.name > b.name) return sortOrder === SortOrderEnum.ASC ? 1 : -1
         }
 
-        if (idOrder !== undefined) {
-          return idOrder === SortOrderEnum.ASC ? a.id - b.id : b.id - a.id
+        if (criteria === FilterCriteriaEnum.ID) {
+          return sortOrder === SortOrderEnum.ASC ? a.id - b.id : b.id - a.id
         }
 
         return 0
