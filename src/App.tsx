@@ -220,9 +220,11 @@ function App() {
       >
         Load More
       </button>
-      {filteredPokemon.map(p => (
-        <OverviewCard data={p} key={`pokemon-${p.id}`} />
-      ))}
+      <div className="w-full flex justify-center flex-wrap gap-4">
+        {filteredPokemon.map(p => (
+          <OverviewCard data={p} key={`pokemon-${p.id}`} />
+        ))}
+      </div>
     </>
   )
 }
