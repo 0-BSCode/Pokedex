@@ -14,7 +14,8 @@ function App() {
     searchPokemon,
     sortPokemon,
   } = usePokemonStore()
-  const { pageNumber, increasePageNumber } = usePageStore()
+  const { pageNumber, increasePageNumber, canIncrement, setCanIncrement } =
+    usePageStore()
   const isCalled = useRef(false)
   const [nameSearchString, setNameSearchString] = useState("")
   const [idSearchString, setIdSearchString] = useState("")
@@ -29,9 +30,14 @@ function App() {
   >(undefined)
 
   // TODO: Extract to external function (just call function here)
-  // TODO: Disable button once all have been fetched
+  // TODO: Add loading states
   const getPokemon = async () => {
     const data = await PokemonService.fetchPokemonPagination(pageNumber)
+
+    if (data.next === null) {
+      setCanIncrement(false)
+    }
+
     const pokeData = await Promise.all(
       data.results.map(async res => {
         const pokemonInfo = await PokemonService.fetchPokemon(res.url)
@@ -204,7 +210,16 @@ function App() {
           </button>
         </div>
       </div>
-      <button onClick={increasePageNumber}>Load More</button>
+      <button
+        onClick={() => {
+          if (canIncrement) {
+            increasePageNumber()
+          }
+        }}
+        disabled={!canIncrement}
+      >
+        Load More
+      </button>
       {filteredPokemon.map(p => (
         <OverviewCard data={p} key={`pokemon-${p.id}`} />
       ))}

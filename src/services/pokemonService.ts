@@ -5,7 +5,7 @@ import { PokemonType } from "@/types/PokemonType"
 
 const BASE_URL = "https://pokeapi.co/api/v2"
 const LIMIT = 10
-const OFFSET = 10
+const OFFSET = 1000
 
 const PokemonService = {
   // TODO: Refactor names
