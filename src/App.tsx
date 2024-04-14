@@ -5,6 +5,8 @@ import usePageStore from "./stores/pageStore"
 import OverviewCard from "./components/overviewCard"
 import { SortOrderEnum } from "./types/enums/SortOrderEnum"
 import { FilterCriteriaEnum } from "./types/enums/FilterCriteriaEnum"
+import TextInput from "./components/textInput"
+import RadioInput from "./components/radioInput"
 
 function App() {
   const {
@@ -87,128 +89,137 @@ function App() {
   return (
     <>
       <div className="flex flex-col gap-1">
-        <div className="flex gap-2">
-          <div className="flex flex-col gap-1">
-            <input
-              name="searchCriteria"
-              type="radio"
-              id="searchCriteriaId"
-              checked={searchFilterCriteria === FilterCriteriaEnum.ID}
-              onChange={() => {
-                setSearchFilterCriteria(FilterCriteriaEnum.ID)
-              }}
-            />
-            <label htmlFor="searchCriteriaId">ID</label>
-            <br></br>
-            <input
-              name="searchCriteria"
-              type="radio"
-              id="searchCriteriaName"
-              checked={searchFilterCriteria === FilterCriteriaEnum.NAME}
-              onChange={() => {
-                setSearchFilterCriteria(FilterCriteriaEnum.NAME)
-              }}
-            />
-            <label htmlFor="searchCriteriaName">Name</label>
-            <br></br>
+        <div className="flex gap-10 justify-center">
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-4">
+              <h2 className="text-3xl dark:text-white">Search</h2>
+              <div className="flex gap-4">
+                <RadioInput
+                  name="searchCriteriaId"
+                  group="searchCriteria"
+                  label="ID"
+                  checked={searchFilterCriteria === FilterCriteriaEnum.ID}
+                  onChange={() => {
+                    setSearchFilterCriteria(FilterCriteriaEnum.ID)
+                  }}
+                />
+                <RadioInput
+                  name="searchCriteriaName"
+                  group="searchCriteria"
+                  label="Name"
+                  checked={searchFilterCriteria === FilterCriteriaEnum.NAME}
+                  onChange={() => {
+                    setSearchFilterCriteria(FilterCriteriaEnum.NAME)
+                  }}
+                />
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <TextInput
+                name="nameSearch"
+                label="Name"
+                value={nameSearchString}
+                onChange={e => setNameSearchString(e.target.value)}
+                disabled={
+                  !searchFilterCriteria ||
+                  searchFilterCriteria === FilterCriteriaEnum.ID
+                }
+                placeholder="Enter Pokemon name..."
+              />
+              <TextInput
+                name="idSearch"
+                label="ID"
+                value={idSearchString}
+                onChange={e => setIdSearchString(e.target.value)}
+                disabled={
+                  !searchFilterCriteria ||
+                  searchFilterCriteria === FilterCriteriaEnum.NAME
+                }
+                placeholder="Enter Pokemon ID..."
+              />
+            </div>
           </div>
-          <label htmlFor="nameSearch">Name:</label>
-          <input
-            id="nameSearch"
-            type="text"
-            value={nameSearchString}
-            onChange={e => {
-              setNameSearchString(e.target.value)
-            }}
-            disabled={
-              !searchFilterCriteria ||
-              searchFilterCriteria === FilterCriteriaEnum.ID
-            }
-          />
-          <label htmlFor="idSearch">ID:</label>
-          <input
-            id="idSearch"
-            type="text"
-            value={idSearchString}
-            onChange={e => {
-              setIdSearchString(e.target.value)
-            }}
-            disabled={
-              !searchFilterCriteria ||
-              searchFilterCriteria === FilterCriteriaEnum.NAME
-            }
-          />
-        </div>
-        <div className="flex gap-2">
-          <div className="flex flex-col gap-1">
-            <input
-              name="sortCriteria"
-              type="radio"
-              id="sortCriteriaId"
-              checked={sortFilterCriteria === FilterCriteriaEnum.ID}
-              onChange={() => {
-                setSortFilterCriteria(FilterCriteriaEnum.ID)
-              }}
-            />
-            <label htmlFor="sortCriteriaId">ID</label>
-            <br></br>
-            <input
-              name="sortCriteria"
-              type="radio"
-              id="sortCriteriaName"
-              checked={sortFilterCriteria === FilterCriteriaEnum.NAME}
-              onChange={() => {
-                setSortFilterCriteria(FilterCriteriaEnum.NAME)
-              }}
-            />
-            <label htmlFor="sortCriteriaName">Name</label>
-            <br></br>
+          <div className="flex flex-col gap-2">
+            <h2 className="text-3xl dark:text-white">Sort</h2>
+            <div className="flex flex-col gap-1">
+              <div className="flex gap-4">
+                <RadioInput
+                  name="sortCriteriaName"
+                  group="sortCriteria"
+                  label="Name"
+                  checked={sortFilterCriteria === FilterCriteriaEnum.NAME}
+                  onChange={() => {
+                    setSortFilterCriteria(FilterCriteriaEnum.NAME)
+                  }}
+                />
+                <RadioInput
+                  name="sortCriteriaId"
+                  group="sortCriteria"
+                  label="ID"
+                  checked={sortFilterCriteria === FilterCriteriaEnum.ID}
+                  onChange={() => {
+                    setSortFilterCriteria(FilterCriteriaEnum.ID)
+                  }}
+                />
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={() => {
+                    setSortOrder(SortOrderEnum.ASC)
+                  }}
+                  disabled={
+                    !sortFilterCriteria ||
+                    sortFilterCriteria === FilterCriteriaEnum.ID
+                  }
+                >
+                  Sort by name ASC
+                </button>
+                <button
+                  onClick={() => {
+                    setSortOrder(SortOrderEnum.DESC)
+                  }}
+                  disabled={
+                    !sortFilterCriteria ||
+                    sortFilterCriteria === FilterCriteriaEnum.ID
+                  }
+                >
+                  Sort by name DESC
+                </button>
+              </div>
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={() => {
+                    setSortOrder(SortOrderEnum.ASC)
+                  }}
+                  disabled={
+                    !sortFilterCriteria ||
+                    sortFilterCriteria === FilterCriteriaEnum.NAME
+                  }
+                >
+                  Sort by ID ASC
+                </button>
+                <button
+                  onClick={() => {
+                    setSortOrder(SortOrderEnum.DESC)
+                  }}
+                  disabled={
+                    !sortFilterCriteria ||
+                    sortFilterCriteria === FilterCriteriaEnum.NAME
+                  }
+                >
+                  Sort by ID DESC
+                </button>
+              </div>
+            </div>
           </div>
-          <button
-            onClick={() => {
-              setSortOrder(SortOrderEnum.ASC)
-            }}
-            disabled={
-              !sortFilterCriteria ||
-              sortFilterCriteria === FilterCriteriaEnum.ID
-            }
-          >
-            Sort by name ASC
-          </button>
-          <button
-            onClick={() => {
-              setSortOrder(SortOrderEnum.DESC)
-            }}
-            disabled={
-              !sortFilterCriteria ||
-              sortFilterCriteria === FilterCriteriaEnum.ID
-            }
-          >
-            Sort by name DESC
-          </button>
-          <button
-            onClick={() => {
-              setSortOrder(SortOrderEnum.ASC)
-            }}
-            disabled={
-              !sortFilterCriteria ||
-              sortFilterCriteria === FilterCriteriaEnum.NAME
-            }
-          >
-            Sort by ID ASC
-          </button>
-          <button
-            onClick={() => {
-              setSortOrder(SortOrderEnum.DESC)
-            }}
-            disabled={
-              !sortFilterCriteria ||
-              sortFilterCriteria === FilterCriteriaEnum.NAME
-            }
-          >
-            Sort by ID DESC
-          </button>
         </div>
+      </div>
+      <div className="w-full flex justify-center flex-wrap gap-4">
+        {filteredPokemon.map(p => (
+          <OverviewCard data={p} key={`pokemon-${p.id}`} />
+        ))}
       </div>
       <button
         onClick={() => {
@@ -220,21 +231,8 @@ function App() {
       >
         Load More
       </button>
-      <div className="w-full flex justify-center flex-wrap gap-4">
-        {filteredPokemon.map(p => (
-          <OverviewCard data={p} key={`pokemon-${p.id}`} />
-        ))}
-      </div>
     </>
   )
 }
 
 export default App
-
-/**
- * TODO
- * 1. Fetch the pokemon information (use https://pokeapi.co/api/v2/pokemon/{id or name}/)
- * 2. Fetch pokemon type information (use https://pokeapi.co/api/v2/type/{name}/, use half_damage_to and no_damage_to fields)
- * 3. Card info: ID, Name, Photo, Type
- * 4. Detailed info: ID, Name, Photo, Types, Height, Weight, Categories, Stats, Weakness
- */
