@@ -3,9 +3,11 @@ import PokemonService from "./services/pokemonService"
 import usePokemonStore from "./stores/pokemonStore"
 import usePageStore from "./stores/pageStore"
 import OverviewCard from "./components/overviewCard"
+import { SortOrderEnum } from "./types/enums/SortOrderEnum"
 
 function App() {
-  const { pokemon, extendPokemon } = usePokemonStore()
+  const { pokemon, extendPokemon, sortPokemonByName, sortPokemonById } =
+    usePokemonStore()
   const { pageNumber, increasePageNumber } = usePageStore()
   const isCalled = useRef(false)
   // TODO: Extract to external function (just call function here)
@@ -36,6 +38,34 @@ function App() {
 
   return (
     <>
+      <button
+        onClick={() => {
+          sortPokemonByName(SortOrderEnum.ASC)
+        }}
+      >
+        Sort by name ASC
+      </button>
+      <button
+        onClick={() => {
+          sortPokemonByName(SortOrderEnum.DESC)
+        }}
+      >
+        Sort by name DESC
+      </button>
+      <button
+        onClick={() => {
+          sortPokemonById(SortOrderEnum.ASC)
+        }}
+      >
+        Sort by ID ASC
+      </button>
+      <button
+        onClick={() => {
+          sortPokemonById(SortOrderEnum.DESC)
+        }}
+      >
+        Sort by ID DESC
+      </button>
       <button onClick={increasePageNumber}>Load More</button>
       {pokemon.map(p => (
         <OverviewCard data={p} key={`pokemon-${p.id}`} />
