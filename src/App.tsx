@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import PokemonService from "./services/pokemonService"
 import usePokemonStore from "./stores/pokemonStore"
 import usePageStore from "./stores/pageStore"
@@ -6,10 +6,24 @@ import OverviewCard from "./components/overviewCard"
 import { SortOrderEnum } from "./types/enums/SortOrderEnum"
 
 function App() {
-  const { pokemon, extendPokemon, sortPokemonByName, sortPokemonById } =
-    usePokemonStore()
+  const {
+    pokemon,
+    filteredPokemon,
+    extendPokemon,
+    searchPokemon,
+    sortPokemon,
+  } = usePokemonStore()
   const { pageNumber, increasePageNumber } = usePageStore()
   const isCalled = useRef(false)
+  const [nameSortOrder, setNameSortOrder] = useState<SortOrderEnum | undefined>(
+    undefined,
+  )
+  const [idSortOrder, setIdSortOrder] = useState<SortOrderEnum | undefined>(
+    undefined,
+  )
+  const [name, setName] = useState("")
+  const [id, setId] = useState("")
+
   // TODO: Extract to external function (just call function here)
   const getPokemon = async () => {
     const data = await PokemonService.fetchPokemonPagination(pageNumber)
@@ -36,38 +50,64 @@ function App() {
     }
   }, [pageNumber])
 
+  // Whenever Pokemon are fetched, update filteredPokemon
+  useEffect(() => {
+    searchPokemon(name, id)
+    sortPokemon(nameSortOrder, idSortOrder)
+  }, [pokemon])
+
   return (
     <>
-      <button
-        onClick={() => {
-          sortPokemonByName(SortOrderEnum.ASC)
-        }}
-      >
-        Sort by name ASC
-      </button>
-      <button
-        onClick={() => {
-          sortPokemonByName(SortOrderEnum.DESC)
-        }}
-      >
-        Sort by name DESC
-      </button>
-      <button
-        onClick={() => {
-          sortPokemonById(SortOrderEnum.ASC)
-        }}
-      >
-        Sort by ID ASC
-      </button>
-      <button
-        onClick={() => {
-          sortPokemonById(SortOrderEnum.DESC)
-        }}
-      >
-        Sort by ID DESC
-      </button>
+      <div className="flex flex-col gap-1">
+        <button
+          onClick={() => {
+            sortPokemon(SortOrderEnum.ASC, undefined)
+          }}
+        >
+          Sort by name ASC
+        </button>
+        <button
+          onClick={() => {
+            sortPokemon(SortOrderEnum.DESC, undefined)
+          }}
+        >
+          Sort by name DESC
+        </button>
+        <button
+          onClick={() => {
+            sortPokemon(undefined, SortOrderEnum.ASC)
+          }}
+        >
+          Sort by ID ASC
+        </button>
+        <button
+          onClick={() => {
+            sortPokemon(undefined, SortOrderEnum.DESC)
+          }}
+        >
+          Sort by ID DESC
+        </button>
+        <label htmlFor="nameSearch">Name:</label>
+        <input
+          id="nameSearch"
+          type="text"
+          value={name}
+          onChange={e => {
+            setName(e.target.value)
+          }}
+        />
+        <label htmlFor="idSearch">ID:</label>
+        <input
+          id="idSearch"
+          type="text"
+          value={id}
+          onChange={e => {
+            setId(e.target.value)
+          }}
+        />
+      </div>
       <button onClick={increasePageNumber}>Load More</button>
-      {pokemon.map(p => (
+      {filteredPokemon.map(p => (
         <OverviewCard data={p} key={`pokemon-${p.id}`} />
       ))}
     </>
