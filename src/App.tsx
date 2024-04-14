@@ -86,6 +86,7 @@ function App() {
     idSearchString,
   ])
 
+  // TODO: Compartmentalize (search form, sort form, card list, load more button)
   return (
     <div className="my-4">
       <div className="flex flex-col gap-1">
@@ -165,6 +166,7 @@ function App() {
             </div>
             <div className="flex gap-4">
               <div className="flex flex-col gap-2">
+                {/* TODO: Replace w/ smthg more user friendly */}
                 <button
                   onClick={() => {
                     setSortOrder(SortOrderEnum.ASC)
