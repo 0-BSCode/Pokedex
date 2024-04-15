@@ -4,6 +4,10 @@ import usePokemonStore from "@/stores/pokemonStore"
 import { PokemonType } from "@/types/PokemonType"
 import { ReactElement } from "react"
 
+// TODO: Display remaining information
+// TODO: Tidy up form and scroll behavior (left side = sticky)
+// TODO: Remove dead modal code
+// TODO: Address remaining TODO's (or delete them)
 const Toast = ({ data }: { data: PokemonType }): ReactElement => {
   const { setPokemonIdx, pokemon } = usePokemonStore()
   return (
@@ -21,6 +25,7 @@ const Toast = ({ data }: { data: PokemonType }): ReactElement => {
           <button
             type="button"
             className="absolute top-3 end-3 inline-flex flex-shrink-0 justify-center items-center size-5 rounded-lg text-gray-800 opacity-50 hover:opacity-100 focus:outline-none focus:opacity-100 dark:text-white"
+            onClick={() => setPokemonIdx(-1)}
           >
             <span className="sr-only">Close</span>
             <svg
@@ -59,6 +64,21 @@ const Toast = ({ data }: { data: PokemonType }): ReactElement => {
                   style={{ backgroundColor: determineTypeColor(t.name) }}
                 >
                   {t.name.toUpperCase()}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="mt-1 text-sm text-gray-600 dark:text-gray-400 flex flex-col gap-4">
+            <p className="font-medium">Stats: </p>
+            <div className="flex flex-col gap-2">
+              {data.stats.map((s, idx) => (
+                <span
+                  key={`stats-${idx}`}
+                  className={
+                    "inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium text-gray-600"
+                  }
+                >
+                  {s.name}: {s.baseStat} ({s.effort})
                 </span>
               ))}
             </div>
