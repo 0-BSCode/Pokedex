@@ -6,7 +6,9 @@ import { create } from "zustand"
 type PokemonStore = {
   pokemon: PokemonType[]
   filteredPokemon: PokemonType[]
+  pokemonIdx: number
   extendPokemon: (value: PokemonType[]) => void
+  setPokemonIdx: (value: number) => void
   searchPokemon: (criteria: FilterCriteriaEnum, searchString: string) => void
   sortPokemon: (criteria: FilterCriteriaEnum, sortOrder: SortOrderEnum) => void
 }
@@ -14,6 +16,8 @@ type PokemonStore = {
 const usePokemonStore = create<PokemonStore>()(set => ({
   pokemon: [],
   filteredPokemon: [],
+  pokemonIdx: -1,
+  setPokemonIdx: (value: number) => set(state => ({ pokemonIdx: value })),
   // TODO: Refactor (update only pokemon -> apply filter criteria to filteredPokemon -> show filteredPokemon)
   extendPokemon: (values: PokemonType[]) =>
     set(state => ({

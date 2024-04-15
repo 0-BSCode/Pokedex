@@ -12,6 +12,8 @@ import useFilterStore from "./stores/filterStore"
 import SortForm from "./components/sortForm"
 import Spinner from "./components/spinner"
 import Modal from "./components/modal"
+import Toast from "./components/toast"
+import DetailedCard from "./components/detailedCard"
 
 function App() {
   const {
@@ -89,27 +91,29 @@ function App() {
     idSearchString,
   ])
 
-  // TODO: Compartmentalize (search form, sort form, card list, load more button)
   return (
-    <div className="my-4">
+    <div className="my-4 flex">
       {/* Forms */}
-      <div className="flex gap-10 justify-center">
+      <div className="flex flex-col gap-10 h-full overflow-auto float-left w-1/4">
         <SearchForm />
         <SortForm />
+        <DetailedCard />
       </div>
+
       {/* Pokemon list */}
-      <div className="flex flex-col gap-8 items-center">
+      <div className="flex flex-col gap-8 items-center h-full w-3/4 float-left overflow-auto">
         <div className="w-full flex justify-center flex-wrap gap-4">
           {filteredPokemon.map(p => (
             <OverviewCard data={p} key={`pokemon-${p.id}`} />
           ))}
         </div>
+        {/* <Toast /> */}
         {isLoading ? (
           <Spinner />
         ) : (
           <button
             type="button"
-            className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+            className=" py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
             onClick={() => {
               if (canFetch) {
                 increasePageNumber()
