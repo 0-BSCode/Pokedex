@@ -10,6 +10,7 @@ import RadioInput from "./components/radioInput"
 import SearchForm from "./components/searchForm"
 import useFilterStore from "./stores/filterStore"
 import SortForm from "./components/sortForm"
+import Spinner from "./components/spinner"
 
 function App() {
   const {
@@ -29,10 +30,11 @@ function App() {
   } = useFilterStore()
   const isCalled = useRef(false)
   const [canFetch, setCanFetch] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
 
   // TODO: Extract to external function (just call function here)
-  // TODO: Add loading states
   const getPokemon = async () => {
+    setIsLoading(true)
     const data = await PokemonService.fetchPokemonPagination(pageNumber)
 
     if (data.next === null) {
@@ -46,6 +48,7 @@ function App() {
       }),
     )
     extendPokemon(pokeData)
+    setIsLoading(false)
   }
 
   // Needed to query API only once on initial page load
@@ -100,18 +103,22 @@ function App() {
             <OverviewCard data={p} key={`pokemon-${p.id}`} />
           ))}
         </div>
-        <button
-          type="button"
-          className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-          onClick={() => {
-            if (canFetch) {
-              increasePageNumber()
-            }
-          }}
-          disabled={!canFetch}
-        >
-          Load More
-        </button>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <button
+            type="button"
+            className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+            onClick={() => {
+              if (canFetch) {
+                increasePageNumber()
+              }
+            }}
+            disabled={!canFetch}
+          >
+            Load More
+          </button>
+        )}
       </div>
     </div>
   )
