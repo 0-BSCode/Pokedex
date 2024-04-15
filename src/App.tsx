@@ -11,6 +11,7 @@ import SearchForm from "./components/searchForm"
 import useFilterStore from "./stores/filterStore"
 import SortForm from "./components/sortForm"
 import Spinner from "./components/spinner"
+import Modal from "./components/modal"
 
 function App() {
   const {
