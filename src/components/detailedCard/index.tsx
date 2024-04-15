@@ -1,6 +1,5 @@
 import usePokemonStore from "@/stores/pokemonStore"
 import { ReactElement } from "react"
-import Modal from "../modal"
 import Toast from "../toast"
 
 const DetailedCard = (): ReactElement => {

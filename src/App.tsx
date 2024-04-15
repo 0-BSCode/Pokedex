@@ -11,7 +11,6 @@ import SearchForm from "./components/searchForm"
 import useFilterStore from "./stores/filterStore"
 import SortForm from "./components/sortForm"
 import Spinner from "./components/spinner"
-import Modal from "./components/modal"
 import Toast from "./components/toast"
 import DetailedCard from "./components/detailedCard"
 
@@ -94,15 +93,15 @@ function App() {
   return (
     <div className="my-4 flex">
       {/* Forms */}
-      <div className="flex flex-col gap-10 h-full overflow-auto float-left w-1/4">
+      <div className="float-left flex h-full w-1/4 flex-col gap-10 overflow-auto">
         <SearchForm />
         <SortForm />
         <DetailedCard />
       </div>
 
       {/* Pokemon list */}
-      <div className="flex flex-col gap-8 items-center h-full w-3/4 float-left overflow-auto">
-        <div className="w-full flex justify-center flex-wrap gap-4">
+      <div className="float-left flex h-full w-3/4 flex-col items-center gap-8 overflow-auto">
+        <div className="flex w-full flex-wrap justify-center gap-4">
           {filteredPokemon.map(p => (
             <OverviewCard data={p} key={`pokemon-${p.id}`} />
           ))}
@@ -113,7 +112,7 @@ function App() {
         ) : (
           <button
             type="button"
-            className=" py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+            className=" inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50"
             onClick={() => {
               if (canFetch) {
                 increasePageNumber()

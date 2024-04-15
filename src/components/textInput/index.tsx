@@ -21,7 +21,7 @@ const TextInput = ({
     <div>
       <label
         htmlFor={name}
-        className="block text-sm font-medium mb-2 dark:text-white"
+        className="mb-2 block text-sm font-medium dark:text-white"
       >
         {label}
       </label>
@@ -31,7 +31,7 @@ const TextInput = ({
         value={value}
         onChange={onChange}
         disabled={disabled}
-        className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+        className="block w-full rounded-lg border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-700 dark:bg-slate-900 dark:text-gray-400 dark:focus:ring-gray-600"
         placeholder={placeholder}
       />
     </div>

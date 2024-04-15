@@ -2,7 +2,6 @@ import capitalizeString from "@/_utils/capitalizeString"
 import determineTypeColor from "@/_utils/determineTypeColor"
 import { PokemonType } from "@/types/PokemonType"
 import { ReactElement } from "react"
-import Modal from "../modal"
 import usePokemonStore from "@/stores/pokemonStore"
 
 const OverviewCard = ({ data }: { data: PokemonType }): ReactElement => {
@@ -10,9 +9,9 @@ const OverviewCard = ({ data }: { data: PokemonType }): ReactElement => {
 
   return (
     <div>
-      <div className="w-72 flex flex-col bg-white border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+      <div className="flex w-72 flex-col rounded-xl border bg-white shadow-sm dark:border-gray-700 dark:bg-slate-900 dark:shadow-slate-700/[.7]">
         <img
-          className="w-full h-auto rounded-t-xl"
+          className="h-auto w-full rounded-t-xl"
           src={data.photoUrl}
           alt={`${data.name} picture`}
         />
@@ -30,7 +29,7 @@ const OverviewCard = ({ data }: { data: PokemonType }): ReactElement => {
                 <span
                   key={`type-${idx}`}
                   className={
-                    "inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium text-white"
+                    "inline-flex items-center gap-x-1.5 rounded-full px-3 py-1.5 text-xs font-medium text-white"
                   }
                   style={{ backgroundColor: determineTypeColor(t.name) }}
                 >
@@ -42,11 +41,11 @@ const OverviewCard = ({ data }: { data: PokemonType }): ReactElement => {
           <button
             type="button"
             onClick={() => setPokemonIdx(data.id - 1)}
-            className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400"
+            className="mt-3 inline-flex items-center gap-x-1 rounded-lg border border-transparent text-sm font-semibold text-blue-600 hover:text-blue-800 disabled:pointer-events-none disabled:opacity-50 dark:text-blue-500 dark:hover:text-blue-400"
           >
             View Details
             <svg
-              className="flex-shrink-0 size-4"
+              className="size-4 flex-shrink-0"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
