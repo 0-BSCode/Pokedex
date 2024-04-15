@@ -4,9 +4,7 @@ import usePokemonStore from "@/stores/pokemonStore"
 import { PokemonType } from "@/types/PokemonType"
 import { ReactElement } from "react"
 
-// TODO: Display remaining information
-// TODO: Tidy up form and scroll behavior (left side = sticky)
-// TODO: Remove dead modal code
+// TODO: Tidy up UI
 // TODO: Address remaining TODO's (or delete them)
 const Toast = ({ data }: { data: PokemonType }): ReactElement => {
   const { setPokemonIdx, pokemon } = usePokemonStore()
