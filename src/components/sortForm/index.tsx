@@ -11,7 +11,7 @@ const SortForm = (): ReactElement => {
     <div className="flex flex-col gap-2">
       <h2 className="text-3xl dark:text-white">Sort</h2>
       <div className="flex flex-col gap-1">
-        <div className="flex gap-4">
+        <div className="flex">
           <RadioInput
             name="sortCriteriaName"
             group="sortCriteria"

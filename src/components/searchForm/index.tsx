@@ -17,7 +17,7 @@ const SearchForm = (): ReactElement => {
     <div className="flex flex-col gap-2">
       <div className="flex flex-col gap-4">
         <h2 className="text-3xl dark:text-white">Search</h2>
-        <div className="flex gap-4">
+        <div className="flex">
           <RadioInput
             name="searchCriteriaId"
             group="searchCriteria"
@@ -38,7 +38,7 @@ const SearchForm = (): ReactElement => {
           />
         </div>
       </div>
-      <div className="flex gap-4">
+      <div className="flex flex-col gap-4">
         <TextInput
           name="idSearch"
           label="ID"

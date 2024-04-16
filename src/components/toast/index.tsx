@@ -5,6 +5,15 @@ import usePokemonStore from "@/stores/pokemonStore"
 import { PokemonType } from "@/types/PokemonType"
 import { ReactElement } from "react"
 
+const statsStringToStringMapping: Record<string, string> = {
+  attack: "Attack",
+  defense: "Defense",
+  hp: "HP",
+  "special-attack": "Special Attack",
+  "special-defense": "Special Defense",
+  speed: "Speed",
+}
+
 // TODO: Tidy up UI
 // TODO: Address remaining TODO's (or delete them)
 const Toast = ({ data }: { data: PokemonType }): ReactElement => {
@@ -45,13 +54,14 @@ const Toast = ({ data }: { data: PokemonType }): ReactElement => {
           </button>
         </div>
         <div className="me-5 ms-4">
-          <h3 className="text-sm font-medium text-gray-500 dark:text-white">
-            <span className="text-lg font-bold text-gray-800">
-              {capitalizeString(data.name)}
-            </span>{" "}
-            {data.id.toString().padStart(3, "0")}
-          </h3>
-          <hr className="my-3 border-gray-500" />
+          <div>
+            <h3 className="w-full text-sm font-medium text-gray-500 dark:text-white">
+              <span className="text-lg font-bold text-gray-800">
+                {capitalizeString(data.name)}
+              </span>{" "}
+              {data.id.toString().padStart(3, "0")}
+            </h3>
+          </div>
           <div className="mt-1 text-sm text-gray-600 dark:text-gray-400">
             <span className="font-medium">Weight: </span>
             {data.weight} lbs
@@ -60,7 +70,7 @@ const Toast = ({ data }: { data: PokemonType }): ReactElement => {
             <span className="font-medium">Height: </span>
             {data.height} dm
           </div>
-          <hr className="my-3 border-gray-500" />
+          <hr className="m-auto my-4 w-28 border-gray-500" />
           <div className="mt-1 flex gap-4 text-sm text-gray-600 dark:text-gray-400">
             <p className="font-medium">Types: </p>
             <div className="flex gap-2">
@@ -77,8 +87,8 @@ const Toast = ({ data }: { data: PokemonType }): ReactElement => {
               ))}
             </div>
           </div>
-          <div className="mt-1 flex gap-4 text-sm text-gray-600 dark:text-gray-400">
-            <p className="font-medium">Weak Against: </p>
+          <div className="mt-4 flex gap-4 text-sm text-gray-600 dark:text-gray-400">
+            <p className="font-medium">Weakness: </p>
             <div className="flex w-full flex-wrap gap-2">
               {determineTypesWeaknesses(data.types.map(t => t.name)).map(
                 (t, idx) => (
@@ -95,8 +105,8 @@ const Toast = ({ data }: { data: PokemonType }): ReactElement => {
               )}
             </div>
           </div>
-          <hr className="my-3 border-gray-500" />
-          <div className="-m-1.5 max-w-full overflow-x-auto">
+          <hr className="m-auto my-4 w-28 border-gray-500" />
+          <div className="max-w-full overflow-x-auto">
             <div className="inline-block min-w-full p-1.5 align-middle">
               <div className="overflow-hidden">
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
@@ -129,7 +139,7 @@ const Toast = ({ data }: { data: PokemonType }): ReactElement => {
                         className="odd:bg-white even:bg-gray-100 dark:odd:bg-neutral-900 dark:even:bg-neutral-800"
                       >
                         <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-800 dark:text-neutral-200">
-                          {s.name}
+                          {statsStringToStringMapping[s.name]}
                         </td>
                         <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-neutral-200">
                           {s.baseStat}

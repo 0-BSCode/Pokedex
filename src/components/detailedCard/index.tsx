@@ -6,6 +6,7 @@ const DetailedCard = (): ReactElement => {
   const { pokemonIdx, pokemon } = usePokemonStore()
   return (
     <>
+      <h2 className="text-3xl dark:text-white">Pokemon Information</h2>
       {pokemonIdx < 0 ? (
         <p>No Pokemon selected.</p>
       ) : (
