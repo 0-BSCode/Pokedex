@@ -14,7 +14,6 @@ const statsStringToStringMapping: Record<string, string> = {
   speed: "Speed",
 }
 
-// TODO: Tidy up UI
 // TODO: Address remaining TODO's (or delete them)
 const Toast = ({ data }: { data: PokemonType }): ReactElement => {
   const { setPokemonIdx, pokemon } = usePokemonStore()
@@ -64,11 +63,11 @@ const Toast = ({ data }: { data: PokemonType }): ReactElement => {
           </div>
           <div className="mt-1 text-sm text-gray-600 dark:text-gray-400">
             <span className="font-medium">Weight: </span>
-            {data.weight} lbs
+            {data.weight / 10} kg
           </div>
           <div className="mt-1 text-sm text-gray-600 dark:text-gray-400">
             <span className="font-medium">Height: </span>
-            {data.height} dm
+            {data.height * 10} cm
           </div>
           <hr className="m-auto my-4 w-28 border-gray-500" />
           <div className="mt-1 flex gap-4 text-sm text-gray-600 dark:text-gray-400">
@@ -138,13 +137,13 @@ const Toast = ({ data }: { data: PokemonType }): ReactElement => {
                         key={`pokemon-stat-${idx}`}
                         className="odd:bg-white even:bg-gray-100 dark:odd:bg-neutral-900 dark:even:bg-neutral-800"
                       >
-                        <td className="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-800 dark:text-neutral-200">
+                        <td className="whitespace-nowrap px-6 py-2 text-sm font-medium text-gray-800 dark:text-neutral-200">
                           {statsStringToStringMapping[s.name]}
                         </td>
-                        <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-neutral-200">
+                        <td className="whitespace-nowrap px-6 py-2 text-sm text-gray-800 dark:text-neutral-200">
                           {s.baseStat}
                         </td>
-                        <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-800 dark:text-neutral-200">
+                        <td className="whitespace-nowrap px-6 py-2 text-sm text-gray-800 dark:text-neutral-200">
                           {s.effort}
                         </td>
                       </tr>
