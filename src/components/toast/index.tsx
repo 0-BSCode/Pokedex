@@ -23,10 +23,10 @@ const Toast = ({ data }: { data: PokemonType }): ReactElement => {
       className="relative max-w-sm rounded-xl border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-800"
       role="alert"
     >
-      <div className="flex p-4">
+      <div className="flex flex-col items-center p-4">
         <div className="flex-shrink-0">
           <img
-            className="inline-block size-8 rounded-full"
+            className="mb-4 inline-block size-20 rounded-full"
             src={data.photoUrl}
             alt={`${data.name} picture`}
           />

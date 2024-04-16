@@ -89,14 +89,14 @@ function App() {
   return (
     <div className="flex justify-between">
       {/* Forms */}
-      <div className="float-left flex h-full h-screen flex-col gap-10 overflow-auto">
+      <div className="flex h-screen flex-col gap-10 overflow-auto p-4">
         <SearchForm />
         <SortForm />
         <DetailedCard />
       </div>
 
       {/* Pokemon list */}
-      <div className="float-left flex h-screen w-3/4 flex-col items-center gap-8 overflow-auto">
+      <div className="flex h-screen w-3/4 flex-col items-center gap-8 overflow-auto">
         <div className="flex w-full flex-wrap justify-center gap-4">
           {filteredPokemon.map(p => (
             <OverviewCard data={p} key={`pokemon-${p.id}`} />
