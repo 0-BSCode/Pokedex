@@ -10,6 +10,8 @@ type FilterStore = {
   setIdSearchString: (value: string) => void
   searchFilterCriteria: FilterCriteriaEnum | undefined
   setSearchFilterCriteria: (value: FilterCriteriaEnum) => void
+  searchString: string
+  setSearchString: (value: string) => void
 
   // Sorting
   sortFilterCriteria: FilterCriteriaEnum | undefined
@@ -29,6 +31,8 @@ const useFilterStore = create<FilterStore>()(set => ({
   idSearchString: "",
   setIdSearchString: (value: string) =>
     set(state => ({ idSearchString: value })),
+  searchString: "",
+  setSearchString: (value: string) => set(state => ({ searchString: value })),
 
   // Sorting
   sortFilterCriteria: undefined,

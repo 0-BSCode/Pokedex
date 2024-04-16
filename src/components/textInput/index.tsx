@@ -2,7 +2,6 @@ import { ReactElement } from "react"
 
 interface TextInputI {
   name: string
-  label: string
   value: string
   placeholder?: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -11,7 +10,6 @@ interface TextInputI {
 
 const TextInput = ({
   name,
-  label,
   value,
   placeholder,
   onChange,
@@ -19,12 +17,6 @@ const TextInput = ({
 }: TextInputI): ReactElement => {
   return (
     <div>
-      <label
-        htmlFor={name}
-        className="mb-2 block text-sm font-medium dark:text-white"
-      >
-        {label}
-      </label>
       <input
         type="text"
         id={name}

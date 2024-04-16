@@ -3,7 +3,6 @@ import PokemonService from "./services/pokemonService"
 import usePokemonStore from "./stores/pokemonStore"
 import usePageStore from "./stores/pageStore"
 import OverviewCard from "./components/overviewCard"
-import { FilterCriteriaEnum } from "./types/enums/FilterCriteriaEnum"
 import SearchForm from "./components/searchForm"
 import useFilterStore from "./stores/filterStore"
 import SortForm from "./components/sortForm"
@@ -21,6 +20,7 @@ function App() {
   const { pageNumber, increasePageNumber } = usePageStore()
   const {
     searchFilterCriteria,
+    searchString,
     nameSearchString,
     idSearchString,
     sortFilterCriteria,
@@ -66,12 +66,7 @@ function App() {
   // Whenever Pokemon are fetched or filters change, update filteredPokemon to apply filters
   useEffect(() => {
     if (searchFilterCriteria) {
-      searchPokemon(
-        searchFilterCriteria,
-        searchFilterCriteria === FilterCriteriaEnum.ID
-          ? idSearchString
-          : nameSearchString,
-      )
+      searchPokemon(searchFilterCriteria, searchString)
     }
 
     if (sortFilterCriteria && sortOrder) {
@@ -80,10 +75,9 @@ function App() {
   }, [
     pokemon,
     searchFilterCriteria,
+    searchString,
     sortFilterCriteria,
     sortOrder,
-    nameSearchString,
-    idSearchString,
   ])
 
   return (
