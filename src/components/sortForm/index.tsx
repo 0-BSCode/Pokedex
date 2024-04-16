@@ -10,17 +10,11 @@ const SortForm = (): ReactElement => {
   return (
     <div className="flex flex-col gap-2">
       <h2 className="text-3xl dark:text-white">Sort</h2>
-      <div className="flex flex-col gap-1">
+      <div className="flex items-center gap-4">
+        <h5 className="text-md dark:text-white">
+          <strong>Criteria</strong>
+        </h5>
         <div className="flex">
-          <RadioInput
-            name="sortCriteriaName"
-            group="sortCriteria"
-            label="Name"
-            checked={sortFilterCriteria === FilterCriteriaEnum.NAME}
-            onChange={() => {
-              setSortFilterCriteria(FilterCriteriaEnum.NAME)
-            }}
-          />
           <RadioInput
             name="sortCriteriaId"
             group="sortCriteria"
@@ -30,11 +24,22 @@ const SortForm = (): ReactElement => {
               setSortFilterCriteria(FilterCriteriaEnum.ID)
             }}
           />
+          <RadioInput
+            name="sortCriteriaName"
+            group="sortCriteria"
+            label="Name"
+            checked={sortFilterCriteria === FilterCriteriaEnum.NAME}
+            onChange={() => {
+              setSortFilterCriteria(FilterCriteriaEnum.NAME)
+            }}
+          />
         </div>
       </div>
-      <div className="flex gap-4">
+      <div className="flex items-center gap-4">
+        <h5 className="text-md dark:text-white">
+          <strong>Sort Order</strong>
+        </h5>
         <div className="flex gap-2">
-          {/* TODO: Replace w/ smthg more user friendly */}
           <button
             type="button"
             className={
