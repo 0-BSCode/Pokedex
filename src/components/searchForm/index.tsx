@@ -20,7 +20,7 @@ const SearchForm = (): ReactElement => {
   }, [searchFilterCriteria])
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4 rounded-xl border border-gray-200 bg-white p-4 shadow-sm md:p-5 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-400">
       <h2 className="text-3xl dark:text-white">Search</h2>
       <div className="flex items-center gap-4">
         <h5 className="text-md dark:text-white">

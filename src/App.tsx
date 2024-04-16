@@ -83,7 +83,7 @@ function App() {
   return (
     <div className="flex justify-between">
       {/* Forms */}
-      <div className="flex h-screen flex-col gap-10 overflow-auto p-4">
+      <div className="flex h-screen flex-col gap-6 overflow-auto p-4">
         <SearchForm />
         <SortForm />
         <DetailedCard />
