@@ -14,7 +14,6 @@ const statsStringToStringMapping: Record<string, string> = {
   speed: "Speed",
 }
 
-// TODO: Address remaining TODO's (or delete them)
 const Toast = ({ data }: { data: PokemonType }): ReactElement => {
   const { setPokemonIdx, pokemon } = usePokemonStore()
   return (
