@@ -18,19 +18,12 @@ function App() {
     sortPokemon,
   } = usePokemonStore()
   const { pageNumber, increasePageNumber } = usePageStore()
-  const {
-    searchFilterCriteria,
-    searchString,
-    nameSearchString,
-    idSearchString,
-    sortFilterCriteria,
-    sortOrder,
-  } = useFilterStore()
+  const { searchFilterCriteria, searchString, sortFilterCriteria, sortOrder } =
+    useFilterStore()
   const isCalled = useRef(false)
   const [canFetch, setCanFetch] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
 
-  // TODO: Extract to external function (just call function here)
   const getPokemon = async () => {
     setIsLoading(true)
     const data = await PokemonService.fetchPokemonPagination(pageNumber)

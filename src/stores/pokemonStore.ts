@@ -18,7 +18,6 @@ const usePokemonStore = create<PokemonStore>()(set => ({
   filteredPokemon: [],
   pokemonIdx: -1,
   setPokemonIdx: (value: number) => set(state => ({ pokemonIdx: value })),
-  // TODO: Refactor (update only pokemon -> apply filter criteria to filteredPokemon -> show filteredPokemon)
   extendPokemon: (values: PokemonType[]) =>
     set(state => ({
       pokemon: [...state.pokemon, ...values],
@@ -35,8 +34,10 @@ const usePokemonStore = create<PokemonStore>()(set => ({
           )
         }
 
-        // TODO: Input validation
-        if (criteria === FilterCriteriaEnum.ID) {
+        if (
+          criteria === FilterCriteriaEnum.ID &&
+          !isNaN(Number(searchString))
+        ) {
           filteredPokemon = state.pokemon.filter(
             pokemon => pokemon.id === Number(searchString),
           )
